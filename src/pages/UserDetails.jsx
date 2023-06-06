@@ -12,6 +12,8 @@ const UserDetails = ({
   startDate,
   endDate,
   rentalDuration,
+  totalAmount,
+  setTotalAmount,
 }) => {
   const location = useLocation();
   const [userInfo, setUserInfo] = useState({
@@ -206,22 +208,115 @@ const UserDetails = ({
           <div className="formTitleContainer">
             <h1 className="formTitle">Vérifier et réserver</h1>
           </div>
-          <div className="bookingInfoConatiner">
+          <div className="bookingInfoContainer">
             <div className="carInfoContainer">
               <div className="carInfoDetails">
                 <p>{`${selectedElem.headlines.description} ${selectedElem.headlines.shortSubline}`}</p>
-                <div>
-                  <span>{agencyName}</span>
-                  <span>{`${format(startDate, "dd MMMM HH:mm")} - ${format(
+                <div className="subInfoContainer">
+                  <p>{agencyName}</p>
+                  <p>{`${format(startDate, "dd MMMM HH:mm")} - ${format(
                     endDate,
                     "dd MMMM HH:mm"
-                  )}`}</span>
+                  )}`}</p>
                 </div>
               </div>
               <div className="carPictContainer">
-                <img src={`${selectedElem.images.small}`} alt="" />
+                <img
+                  className="carPict"
+                  src={`${selectedElem.images.small}`}
+                  alt=""
+                />
               </div>
             </div>
+            <div>
+              <p className="bookingSubTitle">Votre offre inclut</p>
+              <div>
+                {includedCharges.map((elem) => {
+                  return <p key={elem.title}>{elem.title}</p>;
+                })}
+              </div>
+            </div>
+            <div>
+              <p className="bookingSubTitle">Exigence pour les conducteurs</p>
+              <div className="billLine">
+                <span className="lineText">
+                  {`Conducteur agé d'au moins ${selectedElem.carGroupInfo.driverMinAge} ans`}
+                </span>
+              </div>
+            </div>
+            <div>
+              <p className="bookingSubTitle">Période de location</p>
+              <div className="billLine">
+                <span className="lineText">
+                  {`Durée de la location ( ${rentalDuration} jours x ${
+                    selectedElem.prices.currency
+                  } 
+                    ${selectedElem.prices.dayPrice.amount.toFixed(2)})`}
+                </span>
+                <span>
+                  {`€ ${(
+                    rentalDuration * selectedElem.prices.dayPrice.amount
+                  ).toFixed(2)}`}
+                </span>
+              </div>
+            </div>
+            <div>
+              <p className="bookingSubTitle">Protection et options</p>
+
+              <div>
+                {cart.map((elem) => {
+                  console.log(elem);
+                  return (
+                    <div key={elem.id} className="billLine">
+                      <span className="lineText">{elem.title}</span>
+                      <span>
+                        €{" "}
+                        {(elem.price.unit === "jour"
+                          ? elem.price.amount * rentalDuration
+                          : elem.price.amount
+                        ).toFixed(2)}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div>
+              <p className="bookingSubTitle">Frais</p>
+
+              <div>
+                {extraFees.map((elem) => {
+                  return (
+                    <div key={elem.id} className="billLine">
+                      <span className="lineText">{elem.title}</span>
+                      <span>
+                        €{" "}
+                        {(elem.price.unit === "jour"
+                          ? elem.price.amount * rentalDuration
+                          : elem.price.amount
+                        ).toFixed(2)}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="totalAmountBlock">
+                <p className="totalSubtitle">Total</p>
+                <div className="billLine">
+                  <div className="totalAmount">
+                    <span>€ {totalAmount} </span>
+                    <span className="lineText">Taxe incluses</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="divider">
+            <p>
+              En cliquant sur le bouton, je confirme que j'ai lu et accépté les
+              informations de location et termes et conditions.
+            </p>
           </div>
 
           <button type="submit">Submit</button>

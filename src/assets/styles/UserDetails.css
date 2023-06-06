@@ -41,6 +41,47 @@
   flex-wrap: wrap;
 }
 
-.bookingInfoConatiner {
-  width: 60%;
+.bookingInfoContainer {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.carInfoContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+}
+
+.carInfoDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subInfoContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.carPictContainer {
+  width: 50%;
+}
+
+.carPict {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.bookingSubTitle {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.divider {
+  border-top: 1px solid black;
+  margin: 20px 0;
 }

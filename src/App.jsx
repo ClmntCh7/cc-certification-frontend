@@ -24,6 +24,7 @@ const App = () => {
   const [agencyName, setAgencyName] = useState("");
   const [selectedElem, setSelectedElem] = useState();
   const [rentalDuration, setRentalDuration] = useState(1);
+  const [totalAmount, setTotalAmount] = useState();
 
   return (
     <Router>
@@ -43,6 +44,8 @@ const App = () => {
               setAgencyId={setAgencyId}
               agencyName={agencyName}
               setAgencyName={setAgencyName}
+              totalAmount={totalAmount}
+              setTotalAmount={setTotalAmount}
             />
           }
         />
@@ -64,6 +67,8 @@ const App = () => {
               setSelectedElem={setSelectedElem}
               rentalDuration={rentalDuration}
               setRentalDuration={setRentalDuration}
+              totalAmount={totalAmount}
+              setTotalAmount={setTotalAmount}
             />
           }
         />
@@ -85,6 +90,8 @@ const App = () => {
               setSelectedElem={setSelectedElem}
               rentalDuration={rentalDuration}
               setRentalDuration={setRentalDuration}
+              totalAmount={totalAmount}
+              setTotalAmount={setTotalAmount}
             />
           }
         />
@@ -106,6 +113,8 @@ const App = () => {
               setSelectedElem={setSelectedElem}
               rentalDuration={rentalDuration}
               setRentalDuration={setRentalDuration}
+              totalAmount={totalAmount}
+              setTotalAmount={setTotalAmount}
             />
           }
         />

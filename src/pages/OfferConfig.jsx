@@ -10,6 +10,8 @@ const OfferConfig = ({
   startDate,
   endDate,
   rentalDuration,
+  totalAmount,
+  setTotalAmount,
 }) => {
   const location = useLocation();
 
@@ -195,12 +197,19 @@ const OfferConfig = ({
               <span>€ {handleFinalTotal()}</span>
             </div>
             <div className="subtitleBlock">
-              <span onClick={() => setIsVisible(true)}>Detail du prix</span>
+              <span
+                onClick={() => {
+                  setIsVisible(true);
+                }}
+              >
+                Détail du prix
+              </span>
               <span>Taxes incluses</span>
             </div>
             <button
               className="continueButton"
-              onClick={() =>
+              onClick={() => {
+                setTotalAmount(() => handleFinalTotal());
                 navigate("/personnaldetails", {
                   state: {
                     config: config,
@@ -209,8 +218,8 @@ const OfferConfig = ({
                     cart: cart,
                     images: images,
                   },
-                })
-              }
+                });
+              }}
             >
               Continuer
             </button>

@@ -1,0 +1,155 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("Roboto-Bold.eot");
+  src: url("Roboto-Bold.eot?#iefix") format("embedded-opentype"),
+    url("Roboto-Bold.woff2") format("woff2"),
+    url("Roboto-Bold.woff") format("woff"),
+    url("Roboto-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Condensed";
+  src: url("RobotoCondensed-Bold.eot");
+  src: url("RobotoCondensed-Bold.eot?#iefix") format("embedded-opentype"),
+    url("RobotoCondensed-Bold.woff2") format("woff2"),
+    url("RobotoCondensed-Bold.woff") format("woff"),
+    url("RobotoCondensed-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("Roboto-Medium.eot");
+  src: url("Roboto-Medium.eot?#iefix") format("embedded-opentype"),
+    url("Roboto-Medium.woff2") format("woff2"),
+    url("Roboto-Medium.woff") format("woff"),
+    url("Roboto-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Condensed";
+  src: url("RobotoCondensed-Bold_1.eot");
+  src: url("RobotoCondensed-Bold_1.eot?#iefix") format("embedded-opentype"),
+    url("RobotoCondensed-Bold_1.woff2") format("woff2"),
+    url("RobotoCondensed-Bold_1.woff") format("woff"),
+    url("RobotoCondensed-Bold_1.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("Roboto-Regular.eot");
+  src: url("Roboto-Regular.eot?#iefix") format("embedded-opentype"),
+    url("Roboto-Regular.woff2") format("woff2"),
+    url("Roboto-Regular.woff") format("woff"),
+    url("Roboto-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Condensed";
+  src: url("RobotoCondensed-Light.eot");
+  src: url("RobotoCondensed-Light.eot?#iefix") format("embedded-opentype"),
+    url("RobotoCondensed-Light.woff2") format("woff2"),
+    url("RobotoCondensed-Light.woff") format("woff"),
+    url("RobotoCondensed-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rokkitt";
+  src: url("Rokkitt-Bold.eot");
+  src: url("Rokkitt-Bold.eot?#iefix") format("embedded-opentype"),
+    url("Rokkitt-Bold.woff2") format("woff2"),
+    url("Rokkitt-Bold.woff") format("woff"),
+    url("Rokkitt-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("Roboto-Bold_1.eot");
+  src: url("Roboto-Bold_1.eot?#iefix") format("embedded-opentype"),
+    url("Roboto-Bold_1.woff2") format("woff2"),
+    url("Roboto-Bold_1.woff") format("woff"),
+    url("Roboto-Bold_1.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("Roboto-Medium_1.eot");
+  src: url("Roboto-Medium_1.eot?#iefix") format("embedded-opentype"),
+    url("Roboto-Medium_1.woff2") format("woff2"),
+    url("Roboto-Medium_1.woff") format("woff"),
+    url("Roboto-Medium_1.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rokkitt";
+  src: url("Rokkitt-Regular.eot");
+  src: url("Rokkitt-Regular.eot?#iefix") format("embedded-opentype"),
+    url("Rokkitt-Regular.woff2") format("woff2"),
+    url("Rokkitt-Regular.woff") format("woff"),
+    url("Rokkitt-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("Roboto-Regular_1.eot");
+  src: url("Roboto-Regular_1.eot?#iefix") format("embedded-opentype"),
+    url("Roboto-Regular_1.woff2") format("woff2"),
+    url("Roboto-Regular_1.woff") format("woff"),
+    url("Roboto-Regular_1.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("Roboto-Light.eot");
+  src: url("Roboto-Light.eot?#iefix") format("embedded-opentype"),
+    url("Roboto-Light.woff2") format("woff2"),
+    url("Roboto-Light.woff") format("woff"),
+    url("Roboto-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Condensed";
+  src: url("RobotoCondensed-Regular.eot");
+  src: url("RobotoCondensed-Regular.eot?#iefix") format("embedded-opentype"),
+    url("RobotoCondensed-Regular.woff2") format("woff2"),
+    url("RobotoCondensed-Regular.woff") format("woff"),
+    url("RobotoCondensed-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

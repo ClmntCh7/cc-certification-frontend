@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.formContainer {
+  height: 100%;
+  width: 70%;
+  border: 1px solid black;
+}
+
+.formTitleContainer {
+  border-bottom: 3px solid black;
+}
+
+.formTitle {
+  font-size: 30px;
+}
+
+.formTopContainer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 70px;
+  justify-content: space-between;
+}
+
+.formBottomContainer {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  flex-wrap: wrap;
+}
+
+.bookingInfoConatiner {
+  width: 60%;
+}

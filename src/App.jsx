@@ -12,13 +12,8 @@ import Backoffice from "./pages/Backoffice";
 
 // Components
 import Header from "./components/Header";
-import MyComponent from "./components/Table";
 
 const App = () => {
-  // const [search, setSearch] = useState(() => {
-  //   const storedSearch = localStorage.getItem("search");
-  //   return storedSearch ? JSON.parse(storedSearch) : [];
-  // });
   const [search, setSearch] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -144,10 +139,7 @@ const App = () => {
             />
           }
         />
-        <Route path="/table" element={<MyComponent />} />
       </Routes>
-
-      {/* <Modal /> */}
     </Router>
   );
 };

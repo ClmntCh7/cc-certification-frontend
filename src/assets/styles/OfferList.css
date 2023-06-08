@@ -16,15 +16,16 @@ body {
 
 .filterContainer {
   height: 100px;
-  border: 2px solid white;
   display: flex;
   align-items: center;
+  padding: 0 20px;
   gap: 30px;
+  border-bottom: 1px solid #191919;
+  margin-bottom: 10px;
 }
 
 .offerListContainer {
   padding: 20 0;
-  border: 2px green solid;
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
@@ -37,13 +38,14 @@ body {
   flex-direction: column;
   gap: 10px;
   width: 250px;
-  border: 1px solid black;
 }
 .cardTitle {
-  background-color: black;
+  background-color: #191919;
   color: #ff5f00;
   padding: 10px 10px;
   width: fit-content;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .carImgContainer {
@@ -78,15 +80,32 @@ body {
 .carDetailsContainer {
   height: 100%;
   width: 70%;
-  object-fit: contain;
+  object-fit: cover;
+  background-position: left;
+  padding: 30px;
 }
 
 .carDetailsWrapper {
   display: flex;
   gap: 20px;
+  color: white;
 }
 
-.rightContainer {
-  background-color: grey;
+.modalRightContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #191919;
   flex: 1;
+  justify-content: flex-end;
+  padding: 30px;
+  gap: 20px;
+}
+
+.totalPriceContainer {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  align-items: center;
 }

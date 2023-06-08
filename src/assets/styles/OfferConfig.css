@@ -25,6 +25,8 @@ body {
   padding: 10px 20px;
   color: #ff5f00;
   text-transform: uppercase;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 .heroSubBar {
@@ -35,19 +37,39 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  text-transform: uppercase;
 }
 
 .optionsContainer {
   display: flex;
+  gap: 30px;
 }
 .leftContainer {
-  width: 65%;
+  width: 53%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+  gap: 10px;
+}
+
+.titleConfig {
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.offerOptions > p {
+  color: black;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .includedChargesContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  color: black;
 }
 
 .includedChargesWrapper {
@@ -71,10 +93,9 @@ body {
 
 .includedChargesTitle {
   margin-bottom: 10px;
-  font-size: 18px;
 }
 .includedChargesDescr {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .includedChargesPrice {
@@ -84,6 +105,7 @@ body {
 .rightContainer {
   display: flex;
   justify-content: center;
+  flex: 1;
 }
 
 .rightWraper {
@@ -92,15 +114,20 @@ body {
   padding: 20px;
   width: 90%;
   gap: 15px;
+  align-items: center;
 }
+
 .priceBlock {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .subtitleBlock {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .totalModal-root {
@@ -161,5 +188,21 @@ body {
   flex-direction: column;
 }
 
-.continueButton {
+.buttonContainerContinue {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+
+.activeSixtButtonwhite {
+  all: unset;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #ff5f00;
+  background-color: white;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 12px;
 }

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "../assets/styles/OfferList.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
+import { Autocomplete, TextField } from "@mui/material";
 
 const OfferList = ({
   search,
@@ -19,8 +20,9 @@ const OfferList = ({
   const [data, setdata] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
-
   const [images, setImages] = useState();
+  const [carCategories, setCarCategories] = useState();
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const navigate = useNavigate();
 
@@ -58,6 +60,11 @@ const OfferList = ({
   };
 
   useEffect(() => {
+    const carCategories = data.map((value) => value.carGroupInfo.bodyStyle);
+    setCarCategories([...new Set(carCategories)]);
+  }, [data]);
+
+  useEffect(() => {
     const getLocations = async () => {
       try {
         const response = await axios.get(
@@ -78,10 +85,28 @@ const OfferList = ({
     };
 
     getLocations();
-  }, [endDate, agencyId, startDate, agencyName, setRentalDuration]);
+  }, [endDate, agencyId, startDate, setRentalDuration, selectedCategory]);
+
+  const filterDataByCategory = (category) => {
+    if (category) {
+      const filteredData = data.filter(
+        (elem) => elem.carGroupInfo.bodyStyle === category
+      );
+      console.log("ici");
+      return filteredData;
+    } else {
+      return data;
+    }
+  };
+
+  const handleCategoryChange = (event, value) => {
+    setSelectedCategory(value);
+  };
 
   return isLoading ? (
-    <p>Loading ...</p>
+    <div className="container">
+      <p>Loading ...</p>
+    </div>
   ) : (
     <>
       <div className="container">
@@ -91,7 +116,7 @@ const OfferList = ({
               <span className="inpuTitle">Retrait et retour</span>
               <p className="whiteText">{search}</p>
             </div>
-            <div className="inputWrapper">
+            <div className="inputDateWrapper">
               <span className="inpuTitle">Date de départ</span>
               <div className="dateTimeInputContainer">
                 <div className="dateInputContainer">
@@ -99,7 +124,7 @@ const OfferList = ({
                 </div>
               </div>
             </div>
-            <div className="inputWrapper">
+            <div className="inputDateWrapper">
               <span className="inpuTitle">Date de retour</span>
               <div className="dateTimeInputContainer">
                 <div className="dateInputContainer">
@@ -112,31 +137,40 @@ const OfferList = ({
         <section>
           <div className="filterContainer">
             <div>
-              <span>23 Offres</span>
+              <span style={{ fontWeight: "bold", fontSize: 18 }}>
+                {data.length}
+              </span>
+              <span> Offres</span>
             </div>
-            <div>Categoies de véhicules</div>
+            <Autocomplete
+              options={carCategories}
+              sx={{ width: 300 }}
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+              renderInput={(params) => (
+                <TextField {...params} label="Catégorie de véhicules" />
+              )}
+            />
           </div>
 
           <div className="offerListContainer">
-            {data.map((elem) => {
+            {filterDataByCategory(selectedCategory).map((elem) => {
               return (
-                <div
-                  key={elem.id}
-                  className="offerCard"
-                  onClick={() => {
-                    setIsVisible(true);
-                    getImages();
-                    findSelectedCar(elem.id);
-                    console.log(elem.id);
-                  }}
-                >
+                <div key={elem.id} className="offerCard">
                   <div className="cardTitle">
                     <span>{elem.headlines.description}</span>
                   </div>
                   <div>
                     <span>{elem.headlines.shortSubline}</span>
                   </div>
-                  <div className="carImgContainer">
+                  <div
+                    className="carImgContainer"
+                    onClick={() => {
+                      setIsVisible(true);
+                      getImages();
+                      findSelectedCar(elem.id);
+                    }}
+                  >
                     <img
                       className="carImage"
                       src={`${elem.images.small}`}
@@ -147,7 +181,13 @@ const OfferList = ({
                     <span>{elem.headlines.mileageInfo}</span>
                   </div>
                   <div>
-                    <span>{`${elem.prices.currency} ${elem.prices.dayPrice.amount} jour`}</span>
+                    <span style={{ color: "white" }}>
+                      {`${elem.prices.currency} `}
+                      <span
+                        style={{ fontSize: 20 }}
+                      >{`${elem.prices.dayPrice.amount}`}</span>{" "}
+                      jour
+                    </span>
                   </div>
                   <div>
                     <span>{`${elem.prices.currency} ${calcTotalAmount(
@@ -177,9 +217,11 @@ const OfferList = ({
           >
             <div
               className="carDetailsContainer"
-              // style={{ backgroundImage: `url(${images[0]})` }}
+              style={images && { backgroundImage: `url(${images[0]})` }}
             >
-              <p>{selectedElem.headlines.longSubline}</p>
+              <p style={{ color: "white", fontSize: 20 }}>
+                {selectedElem.headlines.longSubline}
+              </p>
               <div className="carDetailsWrapper">
                 <div>
                   <span>{selectedElem.carGroupInfo.maxPassengers}</span>
@@ -209,17 +251,20 @@ const OfferList = ({
                 </div>
               </div>
             </div>
-            <div className="rightContainer">
-              <div>
+            <div className="modalRightContainer">
+              <div className="totalPriceContainer">
                 <span>TOTAL</span>
-                <div>
+                <div style={{ display: "flex", flexDirection: "column" }}>
                   <span>{`${selectedElem.prices.currency} ${calcTotalAmount(
                     selectedElem.prices.dayPrice.amount
                   )}`}</span>
-                  <span>Taxes incluses</span>
+                  <span style={{ fontSize: 10, textAlign: "right" }}>
+                    Taxes incluses
+                  </span>
                 </div>
               </div>
               <button
+                className="activeSixtButton"
                 onClick={() => {
                   navigate("/offerconfig", {
                     state: {

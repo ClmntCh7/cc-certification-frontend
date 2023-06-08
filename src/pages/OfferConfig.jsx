@@ -105,10 +105,10 @@ const OfferConfig = ({
         </div>
         <div className="carDetailsWrapper">
           <div>
-            <span>{carGroupInfo.maxPassengers}</span>
+            <span>{carGroupInfo.maxPassengers} sieges</span>
           </div>
           <div>
-            <span>{carGroupInfo.doors}</span>
+            <span>{carGroupInfo.doors} portes</span>
           </div>
           <div>
             <span>{carGroupInfo.automatic ? "Automatique" : "Manuelle"}</span>
@@ -130,8 +130,10 @@ const OfferConfig = ({
       </div>
       <section className="optionsContainer">
         <div className="leftContainer">
-          <p>Choisissez votre protection et vos options</p>
-          <div>
+          <p className="titleConfig">
+            Choisissez votre protection et vos options
+          </p>
+          <div className="offerOptions">
             <p>Votre offe inclut</p>
             <div className="includedChargesContainer">
               {includedCharges.map((elem) => {
@@ -143,7 +145,7 @@ const OfferConfig = ({
               })}
             </div>
           </div>
-          <div>
+          <div className="offerOptions">
             <p>Choisissez vos options</p>
             <div className="includedChargesContainer">
               {additionalCharges.map((elem) => {
@@ -174,36 +176,46 @@ const OfferConfig = ({
         <div className="rightContainer">
           <div className="rightWraper">
             <div className="priceBlock">
-              <span>TOTAL</span>
-              <span>€ {handleFinalTotal()}</span>
+              <span
+                style={{ color: "black", fontWeight: "bold", fontSize: 12 }}
+              >
+                TOTAL
+              </span>
+              <span
+                style={{ color: "white", fontWeight: "bold", fontSize: 18 }}
+              >
+                € {handleFinalTotal()}
+              </span>
             </div>
             <div className="subtitleBlock">
               <span
+                style={{ color: "white" }}
                 onClick={() => {
                   setIsVisible(true);
                 }}
               >
                 Détail du prix
               </span>
-              <span>Taxes incluses</span>
+              <span style={{ color: "white" }}>Taxes incluses</span>
             </div>
-            <button
-              className="continueButton"
-              onClick={() => {
-                setTotalAmount(() => handleFinalTotal());
-                navigate("/personnaldetails", {
-                  state: {
-                    // config: config,
-                    includedCharges: includedCharges,
-                    extraFees: extraFees,
-                    cart: cart,
-                    images: images,
-                  },
-                });
-              }}
-            >
-              Continuer
-            </button>
+            <div className="buttonContainerContinue">
+              <button
+                className="activeSixtButtonwhite"
+                onClick={() => {
+                  setTotalAmount(() => handleFinalTotal());
+                  navigate("/personnaldetails", {
+                    state: {
+                      includedCharges: includedCharges,
+                      extraFees: extraFees,
+                      cart: cart,
+                      images: images,
+                    },
+                  });
+                }}
+              >
+                Continuer
+              </button>
+            </div>
           </div>
         </div>
       </section>

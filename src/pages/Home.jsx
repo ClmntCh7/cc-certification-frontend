@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
+import Carrousel from "../components/Carroussel";
 
 const Home = ({
   search,
@@ -41,8 +42,6 @@ const Home = ({
           `http://localhost:3000/locations?q=${search}`
         );
 
-        console.log("DATA", response.data);
-
         setdata(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -54,29 +53,32 @@ const Home = ({
   }, [search]);
 
   return isLoading ? (
-    <p>Loading ...</p>
+    <div className="container">
+      <p>Loading ...</p>
+    </div>
   ) : (
     <div className="container">
-      <div className="inputsBlock">
-        <div className="inputsNavContainer">
-          <div>
-            <span>VOITURES</span>
+      <div>
+        <div className="inputsBlock">
+          <div className="inputsNavContainer">
+            <div className="linkContainer">
+              <span>VOITURES</span>
+            </div>
           </div>
-        </div>
-        <div className="inputsContainer">
-          <div className="inputWrapper">
-            <span className="inpuTitle">Retrait et retour</span>
-            <input
-              type="Searchbar-input"
-              placeholder="Search..."
-              onChange={handleSearch}
-              value={search}
-            />
-          </div>
-          <div className="inputWrapper">
-            <span className="inpuTitle">Date de départ</span>
-            <div className="dateTimeInputContainer">
-              <div className="dateInputContainer">
+          <div className="inputsContainer">
+            <div className="inputWrapper searchbar">
+              <span className="inpuTitle">Retrait et retour</span>
+              <input
+                className="inputDiv"
+                type="Searchbar-input"
+                placeholder="Search..."
+                onChange={handleSearch}
+                value={search}
+              />
+            </div>
+            <div className="inputWrapper">
+              <span className="inpuTitle">Date de départ</span>
+              <div className="dateTimeInputContainer">
                 <DatePicker
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
@@ -88,11 +90,11 @@ const Home = ({
                 />
               </div>
             </div>
-          </div>
-          <div className="inputWrapper">
-            <span className="inpuTitle">Date de retour</span>
-            <div className="dateTimeInputContainer">
-              <div className="dateInputContainer">
+            <div className="inputWrapper">
+              <div>
+                <span className="inpuTitle">Date de retour</span>
+              </div>
+              <div className="dateTimeInputContainer">
                 <DatePicker
                   selected={endDate}
                   onChange={(date) => setEndDate(date)}
@@ -104,10 +106,13 @@ const Home = ({
                 />
               </div>
             </div>
-          </div>
 
-          <div>
             <button
+              className={
+                search && startDate && endDate
+                  ? "activeSixtButton"
+                  : "inactiveSixtButton"
+              }
               disabled={search && startDate && endDate ? false : true}
               onClick={() => {
                 navigate("/offerlist", {
@@ -123,42 +128,44 @@ const Home = ({
               VOIR LES OFFRES
             </button>
           </div>
+          {showSearch && (
+            <div
+              className="resultsContainer-root"
+              onClick={() => {
+                setShowSearch(false);
+              }}
+            >
+              <div
+                className="resultsContainer"
+                onClick={(event) => {
+                  event.stopPropagation();
+                }}
+              >
+                <p style={{ fontSize: 20 }}>Agences</p>
+                {data.map((elem) => {
+                  return (
+                    <div
+                      className="resultItem"
+                      key={elem.id}
+                      onClick={() => {
+                        setSearch(elem.subtitle);
+                        setShowSearch(false);
+                        setAgencyId(elem.id);
+                        setAgencyName(elem.subtitle);
+                      }}
+                    >
+                      <span>{elem.subtitle}</span>;
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="homeCarrouselContainer">
+          <Carrousel />
         </div>
       </div>
-
-      {/* Modals */}
-      {showSearch && (
-        <div
-          className="resultsContainer-root"
-          onClick={() => {
-            setShowSearch(false);
-          }}
-        >
-          <div
-            className="resultsContainer"
-            onClick={(event) => {
-              event.stopPropagation();
-            }}
-          >
-            {data.map((elem) => {
-              return (
-                <div
-                  className="resultItem"
-                  key={elem.id}
-                  onClick={() => {
-                    setSearch(elem.subtitle);
-                    setShowSearch(false);
-                    setAgencyId(elem.id);
-                    setAgencyName(elem.subtitle);
-                  }}
-                >
-                  <span>{elem.subtitle}</span>;
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

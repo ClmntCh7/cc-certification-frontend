@@ -11,15 +11,14 @@ a {
 }
 header {
   height: 100px;
-  border: 1px solid black;
   display: flex;
   align-items: center;
   background-color: white;
+  padding: 0 20px;
 }
 
 .logoContainer {
   width: 100px;
-  border: 1px solid black;
   align-items: center;
 }
 
@@ -35,11 +34,11 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid black;
+  padding: 0 10px;
+  font-weight: bold;
 }
 
 .leftNavContainer {
-  /* background-color: red; */
   height: 100%;
   width: 90%;
   display: flex;
@@ -49,59 +48,78 @@ header {
 }
 
 .rightNavContainer {
-  /* background-color: violet; */
-  width: 10%;
+  width: 30%;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.link {
+  all: unset;
+  cursor: pointer;
 }
 
 .inputsBlock {
-  height: 100px;
   background-color: #191919;
+  padding: 20px 30px;
   position: relative;
-  border: 1px red solid;
+}
+
+.linkContainer {
+  color: #ff5f00;
+  margin-bottom: 15px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: underline;
 }
 
 .inputsNavContainer {
-  height: 30%;
-  border: 1px solid orange;
+  height: 40%;
 }
 
 .inputsContainer {
   display: flex;
+  justify-content: space-between;
   width: 100%;
-  align-items: center;
+  align-items: flex-end;
 }
+
 .inputWrapper {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  border: 2px solid red;
+  gap: 10px;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.searchbar {
+  width: 400px;
 }
 
 .inpuTitle {
   color: #ff5f00;
 }
 
-.resultsContainer-root {
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+.inputDiv {
+  all: unset;
+  color: white;
+  border-bottom: 2px solid white;
+  padding: 10px;
+  font-size: 18px;
 }
 
 .resultsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  top: 250px;
   position: absolute;
-  height: 200px;
-  width: 100%;
-  top: 0px;
-  border: 1px red solid;
+  height: 250px;
+  width: 75%;
   background-color: white;
+  padding: 20px;
 }
 
 .resultItem {
@@ -110,4 +128,46 @@ header {
 
 .dateTimeInputContainer {
   display: flex;
+  z-index: 2;
+}
+
+.activeSixtButton {
+  all: unset;
+  text-transform: uppercase;
+  color: white;
+  background-color: #ff5f00;
+  padding: 10px 20px;
+  font-size: 12px;
+}
+
+.inactiveSixtButton {
+  all: unset;
+  text-transform: uppercase;
+  color: #6d6d6d;
+  background-color: #818183;
+  padding: 10px 30px;
+}
+
+.homeCarrouselContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.modalContainer {
+  position: absolute;
+}
+
+.resultsContainer-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
 }

@@ -78,6 +78,8 @@ const UserDetails = ({
     console.log("submit", userInfo);
   };
 
+  const countries = ["France", "Allemagne"];
+
   return (
     <div className="container">
       <div className="pageContainer">
@@ -157,12 +159,11 @@ const UserDetails = ({
                   value={userInfo.country}
                   onChange={(event) => handleInputChange(event)}
                 >
-                  <option value="France">France</option>
-                  {/* {countries.map((country) => (
-                <option key={country.code} value={country.name}>
-                  {country.name}
-                </option>
-              ))} */}
+                  {countries.map((country, index) => (
+                    <option key={index} value={country}>
+                      {country}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="datePicker">

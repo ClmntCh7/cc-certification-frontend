@@ -25,15 +25,23 @@ const Header = ({ isLogged, setIsLogged }) => {
             <div className="navItem">
               <span>SHARE</span>
             </div>
+            <div className="navItem">
+              <span>RIDE</span>
+            </div>
+            <div className="navItem">
+              <span>SIXT+ </span>
+              <span style={{ fontSize: 12 }}> ABONNEMENT AUTO</span>
+            </div>
           </div>
           <div className="rightNavContainer">
-            <Link to={"/backoffice"}>
-              <div className="navItem">
+            <Link className="link" to={"/backoffice"}>
+              <div className="navItem link">
                 <span>BACKOFFICE</span>
               </div>
             </Link>
             {isLogged && (
               <button
+                className="activeSixtButton"
                 onClick={() => {
                   Cookies.remove("password");
                   setIsLogged(false);

@@ -12,7 +12,7 @@ const Header = ({ isLogged, setIsLogged }) => {
           <div className="logoContainer">
             <img
               className="logo"
-              src="./src/assets/images/sixt-logo.png"
+              src="https://res.cloudinary.com/lereacteur-apollo/image/upload/v1621254047/certification/Sixt/sixt-logo_cuocws.png"
               alt=""
             />
           </div>

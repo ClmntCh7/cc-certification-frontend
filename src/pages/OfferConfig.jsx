@@ -25,25 +25,6 @@ const OfferConfig = ({
   const { id, images, headlines, carGroupInfo, prices } = selectedElem;
   const { additionalCharges, extraFees, includedCharges, splashImages } = data;
 
-  console.log(includedCharges);
-
-  const [config, setConfig] = useState({
-    longSubline: headlines.longSubline,
-    agencyName: agencyName,
-    startDate: startDate,
-    endDate: endDate,
-    carPhotoURL: images.medium,
-    driverMinAge: carGroupInfo.driverMinAge,
-    duration: rentalDuration,
-    dailyPrice: prices.amount,
-
-    includedCharges: includedCharges,
-    options: cart,
-    extraFees: extraFees,
-  });
-
-  console.log("CONFIG", config);
-
   useEffect(() => {
     const getLocations = async () => {
       try {
@@ -212,7 +193,7 @@ const OfferConfig = ({
                 setTotalAmount(() => handleFinalTotal());
                 navigate("/personnaldetails", {
                   state: {
-                    config: config,
+                    // config: config,
                     includedCharges: includedCharges,
                     extraFees: extraFees,
                     cart: cart,
@@ -258,9 +239,8 @@ const OfferConfig = ({
               <div className="totalBlock">
                 <p className="totalSubtitle">Protection et Options</p>
                 {cart.map((elem) => {
-                  console.log(elem);
                   return (
-                    <div key={elem.id} className="billLine">
+                    <div key={elem.title} className="billLine">
                       <span className="lineText">{elem.title}</span>
                       <span>
                         €{" "}
@@ -275,10 +255,9 @@ const OfferConfig = ({
               </div>
               <div className="totalBlock">
                 <p className="totalSubtitle">Frais</p>
-                {extraFees.map((elem) => {
-                  console.log(elem);
+                {extraFees.map((elem, index) => {
                   return (
-                    <div key={elem.title} className="billLine">
+                    <div key={elem.index} className="billLine">
                       <span className="lineText">{elem.title}</span>
                       <span>€ {elem.price.amount.toFixed(2)}</span>
                     </div>

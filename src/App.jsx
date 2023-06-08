@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 // Pages
 import Home from "./pages/Home";
@@ -11,6 +12,7 @@ import Backoffice from "./pages/Backoffice";
 
 // Components
 import Header from "./components/Header";
+import MyComponent from "./components/Table";
 
 const App = () => {
   // const [search, setSearch] = useState(() => {
@@ -25,10 +27,20 @@ const App = () => {
   const [selectedElem, setSelectedElem] = useState();
   const [rentalDuration, setRentalDuration] = useState(1);
   const [totalAmount, setTotalAmount] = useState();
+  const [password, setPassword] = useState("");
+  const backofficePassword = "HelloWorld!";
+  const [isLogged, setIsLogged] = useState(false);
+  const [storedPassword, setStoredPassword] = useState(Cookies.get("password"));
+
+  useEffect(() => {
+    if (storedPassword === backofficePassword) {
+      setIsLogged(true);
+    }
+  }, [storedPassword]);
 
   return (
     <Router>
-      <Header />
+      <Header isLogged={isLogged} setIsLogged={setIsLogged} />
       <Routes>
         <Route
           path="/"
@@ -118,7 +130,21 @@ const App = () => {
             />
           }
         />
-        <Route path="/backoffice" element={<Backoffice />} />
+        <Route
+          path="/backoffice"
+          element={
+            <Backoffice
+              backofficePassword={backofficePassword}
+              password={password}
+              setPassword={setPassword}
+              isLogged={isLogged}
+              setIsLogged={setIsLogged}
+              storedPassword={storedPassword}
+              setStoredPassword={setStoredPassword}
+            />
+          }
+        />
+        <Route path="/table" element={<MyComponent />} />
       </Routes>
 
       {/* <Modal /> */}

@@ -1,21 +1,27 @@
 import { useState } from "react";
 import "../assets/styles/UserDetails.css";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import format from "date-fns/format";
+import axios from "axios";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 
 const UserDetails = ({
   selectedElem,
-  agencyId,
   agencyName,
   startDate,
   endDate,
   rentalDuration,
   totalAmount,
-  setTotalAmount,
 }) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [data, setData] = useState();
+  const [birthdate, setBirthdate] = useState(dayjs(new Date()));
+  const [isVisible, setIsVisible] = useState(false);
   const [userInfo, setUserInfo] = useState({
     email: "",
     title: "",
@@ -25,32 +31,51 @@ const UserDetails = ({
     street: "",
     postalCode: "",
     city: "",
-    birthdate: null,
     country: "",
     phoneCode: "",
     phoneNumber: "",
   });
 
-  console.log(location);
   const { includedCharges, extraFees, cart } = location.state;
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUserInfo((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const userInfoCopy = { ...userInfo };
+    userInfoCopy[name] = value;
+    setUserInfo(userInfoCopy);
   };
+  const createBooking = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/rentalconfigurations/book`,
+        {
+          userInfo: userInfo,
+          birthdate: birthdate,
+          carId: selectedElem.id,
+          startDate: startDate,
+          endDate: endDate,
+          rentalDuration: rentalDuration,
+          totalAmount: totalAmount,
+          selectedElem: selectedElem,
+          cart: cart,
+          extraFees: extraFees,
+          includedCharges: includedCharges,
+        }
+      );
 
-  const handleBirthdateChange = (date) => {
-    setUserInfo((prevData) => ({
-      ...prevData,
-      birthdate: date,
-    }));
+      console.log(response.data);
+      setData(response.data);
+      console.log("log(data)", data);
+      setIsVisible(true);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    createBooking();
+    console.log("submit", userInfo);
   };
 
   return (
@@ -63,19 +88,23 @@ const UserDetails = ({
           <div className="formTopContainer">
             <div>
               <input
+                id="title-mr"
                 type="radio"
                 name="title"
-                value="M."
-                checked={userInfo.title === "M."}
-                onChange={handleInputChange}
+                value="Mr"
+                checked={userInfo.title === "Mr"}
+                onChange={(event) => handleInputChange(event)}
               />
               <label htmlFor="title-mr">M.</label>
+            </div>
+            <div>
               <input
+                id="title-mrs"
                 type="radio"
                 name="title"
                 value="Mme"
                 checked={userInfo.title === "Mme"}
-                onChange={handleInputChange}
+                onChange={(event) => handleInputChange(event)}
               />
               <label htmlFor="title-mrs">Mme</label>
             </div>
@@ -85,7 +114,7 @@ const UserDetails = ({
                 type="text"
                 name="company"
                 value={userInfo.company}
-                onChange={handleInputChange}
+                onChange={(event) => handleInputChange(event)}
               />
             </div>
           </div>
@@ -98,7 +127,7 @@ const UserDetails = ({
                   type="text"
                   name="firstName"
                   value={userInfo.firstName}
-                  onChange={handleInputChange}
+                  onChange={(event) => handleInputChange(event)}
                   required
                 />
               </div>
@@ -108,7 +137,7 @@ const UserDetails = ({
                   type="text"
                   name="email"
                   value={userInfo.email}
-                  onChange={handleInputChange}
+                  onChange={(event) => handleInputChange(event)}
                   required
                 />
               </div>
@@ -118,7 +147,7 @@ const UserDetails = ({
                   type="text"
                   name="street"
                   value={userInfo.street}
-                  onChange={handleInputChange}
+                  onChange={(event) => handleInputChange(event)}
                   required
                 />
               </div>
@@ -126,7 +155,7 @@ const UserDetails = ({
                 <select
                   name="country"
                   value={userInfo.country}
-                  onChange={handleInputChange}
+                  onChange={(event) => handleInputChange(event)}
                 >
                   <option value="France">France</option>
                   {/* {countries.map((country) => (
@@ -136,21 +165,22 @@ const UserDetails = ({
               ))} */}
                 </select>
               </div>
-              <div>
-                <DatePicker
-                  placeholderText="Date de naissance*"
-                  selected={userInfo.birthdate}
-                  onChange={handleBirthdateChange}
-                  dateFormat="dd/MM/yyyy"
-                  showYearDropdown
-                  scrollableYearDropdown
-                  yearDropdownItemNumber={100}
-                  required
-                />
+              <div className="datePicker">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    slotProps={{
+                      textField: {
+                        size: "small",
+                        label: "Date de naissance *",
+                      },
+                    }}
+                    value={birthdate}
+                    onChange={(newValue) => setBirthdate(newValue)}
+                  />
+                </LocalizationProvider>
               </div>
             </div>
 
-            {/* Droite */}
             <div className="rightFormBlock">
               <div>
                 <input
@@ -158,7 +188,7 @@ const UserDetails = ({
                   type="text"
                   name="lastName"
                   value={userInfo.lastName}
-                  onChange={handleInputChange}
+                  onChange={(event) => handleInputChange(event)}
                   required
                 />
               </div>
@@ -168,7 +198,7 @@ const UserDetails = ({
                   type="text"
                   name="phoneCode"
                   value={userInfo.phoneCode}
-                  onChange={handleInputChange}
+                  onChange={(event) => handleInputChange(event)}
                   required
                 />
               </div>
@@ -178,7 +208,7 @@ const UserDetails = ({
                   type="text"
                   name="phoneNumber"
                   value={userInfo.phoneNumber}
-                  onChange={handleInputChange}
+                  onChange={(event) => handleInputChange(event)}
                   required
                 />
               </div>
@@ -188,7 +218,7 @@ const UserDetails = ({
                   type="text"
                   name="postalCode"
                   value={userInfo.postalCode}
-                  onChange={handleInputChange}
+                  onChange={(event) => handleInputChange(event)}
                   required
                 />
               </div>
@@ -198,7 +228,7 @@ const UserDetails = ({
                   type="text"
                   name="city"
                   value={userInfo.city}
-                  onChange={handleInputChange}
+                  onChange={(event) => handleInputChange(event)}
                   required
                 />
               </div>
@@ -265,7 +295,6 @@ const UserDetails = ({
 
               <div>
                 {cart.map((elem) => {
-                  console.log(elem);
                   return (
                     <div key={elem.id} className="billLine">
                       <span className="lineText">{elem.title}</span>
@@ -287,7 +316,7 @@ const UserDetails = ({
               <div>
                 {extraFees.map((elem) => {
                   return (
-                    <div key={elem.id} className="billLine">
+                    <div key={elem.title} className="billLine">
                       <span className="lineText">{elem.title}</span>
                       <span>
                         €{" "}
@@ -322,6 +351,32 @@ const UserDetails = ({
           <button type="submit">Submit</button>
         </form>
       </div>
+      {isVisible && (
+        <div
+          className="confirmationContainer-root"
+          onClick={() => {
+            setIsVisible(false);
+            navigate("/");
+          }}
+        >
+          <div
+            className="confirmationContainer"
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          >
+            <div className="confirmationMsgContainer">
+              <p className="confirmationMsg">Reservation confirmée</p>
+              <div className="confirmNumb">
+                <span style={{ fontSize: 12 }}>
+                  Voici la référence de votre dossier
+                </span>
+                <span style={{ fontSize: 14 }}>{data.bookingId}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

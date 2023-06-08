@@ -127,6 +127,7 @@ const OfferList = ({
                     setIsVisible(true);
                     getImages();
                     findSelectedCar(elem.id);
+                    console.log(elem.id);
                   }}
                 >
                   <div className="cardTitle">

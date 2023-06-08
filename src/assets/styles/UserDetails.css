@@ -85,3 +85,51 @@
   border-top: 1px solid black;
   margin: 20px 0;
 }
+
+.datePicker {
+  margin-top: 10px;
+  color: black;
+  background-color: white;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 5px;
+  border: solid 1px black;
+}
+
+.confirmationContainer-root {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.confirmationContainer {
+  position: absolute;
+  height: 150px;
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+}
+
+.confirmationMsgContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+  justify-content: center;
+  gap: 10px;
+}
+
+.confirmationMsg {
+  text-transform: uppercase;
+}
+.confirmNumb {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}

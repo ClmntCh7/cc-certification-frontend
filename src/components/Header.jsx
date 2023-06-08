@@ -1,6 +1,10 @@
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ isLogged, setIsLogged }) => {
+  useEffect(() => {}, [isLogged]);
+
   return (
     <div className="container">
       <header>
@@ -23,9 +27,21 @@ const Header = () => {
             </div>
           </div>
           <div className="rightNavContainer">
-            <div className="navItem">
-              <span>BACKOFFICE</span>
-            </div>
+            <Link to={"/backoffice"}>
+              <div className="navItem">
+                <span>BACKOFFICE</span>
+              </div>
+            </Link>
+            {isLogged && (
+              <button
+                onClick={() => {
+                  Cookies.remove("password");
+                  setIsLogged(false);
+                }}
+              >
+                Se déconnecter
+              </button>
+            )}
           </div>
         </div>
       </header>

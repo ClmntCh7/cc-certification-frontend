@@ -39,7 +39,7 @@ const Home = ({
     const getLocations = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/locations?q=${search}`
+          `https://site--c-chevalier-sixt--m4snx7ydrpgs.code.run/locations?q=${search}`
         );
 
         setdata(response.data);

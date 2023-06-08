@@ -49,7 +49,7 @@ const OfferList = ({
   const getImages = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/rentalconfigurations/create`,
+        `https://site--c-chevalier-sixt--m4snx7ydrpgs.code.run/rentalconfigurations/create`,
         { offerId: selectedElem.id }
       );
 
@@ -68,7 +68,7 @@ const OfferList = ({
     const getLocations = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/rentaloffers?pickupStation=${agencyId}&returnStation=${agencyId}&pickupDate=${formatDate(
+          `https://site--c-chevalier-sixt--m4snx7ydrpgs.code.run/rentaloffers?pickupStation=${agencyId}&returnStation=${agencyId}&pickupDate=${formatDate(
             startDate
           )}&returnDate=${formatDate(endDate)}`
         );

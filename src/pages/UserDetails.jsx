@@ -47,7 +47,7 @@ const UserDetails = ({
   const createBooking = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/rentalconfigurations/book`,
+        `https://site--c-chevalier-sixt--m4snx7ydrpgs.code.run/rentalconfigurations/book`,
         {
           userInfo: userInfo,
           birthdate: birthdate,

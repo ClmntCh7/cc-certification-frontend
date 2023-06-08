@@ -26,7 +26,9 @@ const Backoffice = ({
     }
     const getBookings = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/bookings`);
+        const response = await axios.get(
+          `https://site--c-chevalier-sixt--m4snx7ydrpgs.code.run/bookings`
+        );
 
         console.log("DATA", response.data);
 

@@ -69,7 +69,7 @@ export default function BookingTable({ data }) {
   const delBooking = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/rentalconfigurations/delete`,
+        `https://site--c-chevalier-sixt--m4snx7ydrpgs.code.run/rentalconfigurations/delete`,
         { ids: rowSelectionModel }
       );
 

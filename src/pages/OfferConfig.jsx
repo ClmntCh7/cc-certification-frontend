@@ -29,7 +29,7 @@ const OfferConfig = ({
     const getLocations = async () => {
       try {
         const response = await axios.post(
-          `http://localhost:3000/rentalconfigurations/create`,
+          `https://site--c-chevalier-sixt--m4snx7ydrpgs.code.run/rentalconfigurations/create`,
           { offerId: id }
         );
 

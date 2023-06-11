@@ -54,7 +54,6 @@ const OfferConfig = ({
     for (let i = 0; i < extraFees.length; i++) {
       finalTotal += extraFees[i].price.amount;
     }
-    // console.log(finalTotal);
     return finalTotal.toFixed(2);
   };
 

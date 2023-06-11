@@ -73,8 +73,6 @@ export default function BookingTable({ data }) {
         { ids: rowSelectionModel }
       );
 
-      console.log("Response", response.data);
-
       setCurrentRows((prevRows) =>
         prevRows.filter((row) => !rowSelectionModel.includes(row._id))
       );
@@ -86,8 +84,6 @@ export default function BookingTable({ data }) {
   useEffect(() => {}, [rowSelectionModel]);
 
   const handleDeleteButtonClick = () => {
-    console.log("hello deleted");
-    console.log("rowSelectionModel", rowSelectionModel);
     delBooking();
   };
 

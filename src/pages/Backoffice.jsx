@@ -30,8 +30,6 @@ const Backoffice = ({
           `https://site--c-chevalier-sixt--m4snx7ydrpgs.code.run/bookings`
         );
 
-        console.log("DATA", response.data);
-
         setData(response.data);
         setIsLoading(false);
       } catch (error) {

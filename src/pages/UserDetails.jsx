@@ -63,9 +63,7 @@ const UserDetails = ({
         }
       );
 
-      console.log(response.data);
       setData(response.data);
-      console.log("log(data)", data);
       setIsVisible(true);
     } catch (error) {
       console.log(error.message);
@@ -75,7 +73,6 @@ const UserDetails = ({
   const handleSubmit = (event) => {
     event.preventDefault();
     createBooking();
-    console.log("submit", userInfo);
   };
 
   const countries = ["France", "Allemagne"];

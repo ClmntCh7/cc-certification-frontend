@@ -42,7 +42,6 @@ const OfferList = ({
   };
 
   const findSelectedCar = (id) => {
-    console.log("id", id);
     const foundCar = data.find((car) => car.id === id);
     setSelectedElem(foundCar);
   };
@@ -53,8 +52,8 @@ const OfferList = ({
         `https://site--c-chevalier-sixt--m4snx7ydrpgs.code.run/rentalconfigurations/create`,
         { offerId: selectedElem.id }
       );
-      setImages(response.data.splashImages);
       setIsImageLoading(false);
+      setImages(response.data.splashImages);
     } catch (error) {
       console.log(error.message);
     }

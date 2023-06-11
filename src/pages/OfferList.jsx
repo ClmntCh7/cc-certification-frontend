@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import { Autocomplete, TextField } from "@mui/material";
+import zIndex from "@mui/material/styles/zIndex";
 
 const OfferList = ({
   search,
@@ -147,7 +148,11 @@ const OfferList = ({
               value={selectedCategory}
               onChange={handleCategoryChange}
               renderInput={(params) => (
-                <TextField {...params} label="Catégorie de véhicules" />
+                <TextField
+                  {...params}
+                  style={{ zIndex: 0 }}
+                  label="Catégorie de véhicules"
+                />
               )}
             />
           </div>

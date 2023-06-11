@@ -23,6 +23,7 @@ const OfferList = ({
   const [images, setImages] = useState();
   const [carCategories, setCarCategories] = useState();
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -52,8 +53,8 @@ const OfferList = ({
         `https://site--c-chevalier-sixt--m4snx7ydrpgs.code.run/rentalconfigurations/create`,
         { offerId: selectedElem.id }
       );
-
       setImages(response.data.splashImages);
+      setIsImageLoading(false);
     } catch (error) {
       console.log(error.message);
     }
@@ -92,7 +93,6 @@ const OfferList = ({
       const filteredData = data.filter(
         (elem) => elem.carGroupInfo.bodyStyle === category
       );
-      console.log("ici");
       return filteredData;
     } else {
       return data;
@@ -215,42 +215,48 @@ const OfferList = ({
               event.stopPropagation();
             }}
           >
-            <div
-              className="carDetailsContainer"
-              style={images && { backgroundImage: `url(${images[0]})` }}
-            >
-              <p style={{ color: "white", fontSize: 20 }}>
-                {selectedElem.headlines.longSubline}
-              </p>
-              <div className="carDetailsWrapper">
-                <div>
-                  <span>{selectedElem.carGroupInfo.maxPassengers}</span>
-                </div>
-                <div>
-                  <span>{selectedElem.carGroupInfo.doors}</span>
-                </div>
-                <div>
-                  <span>
-                    {selectedElem.carGroupInfo.automatic
-                      ? "Automatique"
-                      : "Manuelle"}
-                  </span>
-                </div>
-                <div>
-                  <span>{selectedElem.carGroupInfo.bagage}</span>
-                </div>
-                {selectedElem.carGroupInfo.airCondition ? (
+            {isImageLoading ? (
+              <div className="carDetailsContainer">
+                <p>loading</p>
+              </div>
+            ) : (
+              <div
+                className="carDetailsContainer"
+                style={images && { backgroundImage: `url(${images[0]})` }}
+              >
+                <p style={{ color: "white", fontSize: 20 }}>
+                  {selectedElem.headlines.longSubline}
+                </p>
+                <div className="carDetailsWrapper">
                   <div>
-                    <span>Climatisation</span>
+                    <span>{selectedElem.carGroupInfo.maxPassengers}</span>
                   </div>
-                ) : (
-                  ""
-                )}
-                <div>
-                  <span>{selectedElem.carGroupInfo.driverMinAge} ans</span>
+                  <div>
+                    <span>{selectedElem.carGroupInfo.doors}</span>
+                  </div>
+                  <div>
+                    <span>
+                      {selectedElem.carGroupInfo.automatic
+                        ? "Automatique"
+                        : "Manuelle"}
+                    </span>
+                  </div>
+                  <div>
+                    <span>{selectedElem.carGroupInfo.bagage}</span>
+                  </div>
+                  {selectedElem.carGroupInfo.airCondition ? (
+                    <div>
+                      <span>Climatisation</span>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  <div>
+                    <span>{selectedElem.carGroupInfo.driverMinAge} ans</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
             <div className="modalRightContainer">
               <div className="totalPriceContainer">
                 <span>TOTAL</span>
